@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFUtil", "PDFUtil\PDFUtil.csproj", "{E3030BE4-EBEA-47F6-8E31-23D423E76315}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFFolderBrowser", "wpffolderbrowser\WPFFolderBrowser.csproj", "{CE304F35-FABF-4A24-AC48-5710670A82BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{067281C3-FAC0-4F10-B4EC-D4B5673A0549}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs27
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PDFUtil\\PDFUtil.csproj
+		SccProjectName1 = PDFUtil
+		SccLocalPath1 = PDFUtil
+		SccProjectUniqueName2 = wpffolderbrowser\\WPFFolderBrowser.csproj
+		SccProjectName2 = wpffolderbrowser
+		SccLocalPath2 = wpffolderbrowser
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Debug|x64.ActiveCfg = Debug|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Debug|x86.ActiveCfg = Debug|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Debug|x86.Build.0 = Debug|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Release|Any CPU.ActiveCfg = Release|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Release|x64.ActiveCfg = Release|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Release|x86.ActiveCfg = Release|x86
+		{E3030BE4-EBEA-47F6-8E31-23D423E76315}.Release|x86.Build.0 = Release|x86
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Debug|x64.ActiveCfg = Debug|x64
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Debug|x64.Build.0 = Debug|x64
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Debug|x86.ActiveCfg = Debug|x64
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Release|x64.ActiveCfg = Release|x64
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Release|x64.Build.0 = Release|x64
+		{CE304F35-FABF-4A24-AC48-5710670A82BE}.Release|x86.ActiveCfg = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

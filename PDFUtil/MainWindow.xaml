@@ -1,0 +1,134 @@
+﻿<Window x:Class="PDFUtil.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tk="http://schemas.xceed.com/wpf/xaml/toolkit" Icon="Books.ico"
+        Title="Simple little tool" Height="498" Width="747" Loaded="Window_Loaded">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />                       
+    </Window.Resources>
+    <tk:BusyIndicator IsBusy="{Binding IsBusy}">
+        <DockPanel>
+            <DockPanel MinHeight="25" Background="LightSteelBlue" DockPanel.Dock="Top">
+                <Button DockPanel.Dock="Right" Name="runButton" Click="runButton_Click" Command="{Binding RunCommand}">
+                    <Image Source="img/next.png" Margin="-2" Height="24"/>
+                </Button>
+                <Button DockPanel.Dock="Left" Name="clearButton" Click="clearButton_Click">
+                    <Image Source="img/refresh.png" Margin="-2" Height="24"/>
+                </Button>
+                <Label FontWeight="Bold" Foreground="#FF0B0B4E" HorizontalAlignment="Center">PDF Utilities - Split &amp; Add Cover</Label>
+            </DockPanel>
+            
+            <Label Content="{Binding Error}" Foreground="Red" DockPanel.Dock="Top" HorizontalAlignment="Stretch"/>
+            
+            <Grid DockPanel.Dock="Top" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Input</Label>
+                <TextBox Name="inputFile" Grid.Row="0" Grid.Column="1" Text="{Binding InputFile}" Margin="0,0,25,0" IsReadOnly="True"/>
+                <Button Name="inputFileButton" Click="inputFileButton_Click" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Select a File as input">
+                    <Image Source="img/full_page.png" Margin="-2" Height="24" />
+                </Button>
+                <Button Name="inputFolderButton" Click="inputFolderButton_Click" Grid.Row="0" Grid.Column="2" ToolTip="Select a folder to process many files at once">
+                    <Image Source="img/folder.png" Margin="-2" Height="24" />
+                </Button>
+                                                              
+                <Label Grid.Row="1" Grid.Column="0">Output Folder</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding OutputFolder}"/>
+                <Button Grid.Row="1" Grid.Column="2" Name="outputFolderButton" Click="outputFolderButton_Click" ToolTip="Select a folder to place processed files">
+                    <Image Source="img/folder2.png" Margin="-2" Height="24" />
+                </Button>
+                
+                <!--<CheckBox Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" FlowDirection="RightToLeft" IsChecked="{Binding HasCoverLetter}">Cover Letter</CheckBox>-->
+                <Label Grid.Row="2" Grid.Column="0">Cover Letter</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CoverPath}" IsReadOnly="True"/>
+                <Button Grid.Row="2" Grid.Column="2" Click="coverPathButton_Click" ToolTip="Select a file to add as a cover letter to all processed files">
+                    <Image Source="img/add_page.png" Height="24" Margin="-2"/>
+                </Button>
+                <Label Grid.Row="3" Grid.Column="0">Footer Letter</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding FooterPath}" IsReadOnly="True"/>
+                <Button Grid.Row="3" Grid.Column="2" Name="footerPathButton" Click="FooterPathButton_OnClick" ToolTip="Select a file to add at the end of all processed files">
+                    <Image Source="img/add_page.png" Height="24" Margin="-2"/>
+                </Button>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="260" />
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="LightSteelBlue" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns"/>
+                <DockPanel Grid.Column="0">
+                    <GroupBox Header="File Split" DockPanel.Dock="Top" Visibility="{Binding Path=ShowPagesPerSplit,Converter={StaticResource VisibilityOfBool}}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="150"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Visibility="{Binding Path=ShowStartEnd,Converter={StaticResource VisibilityOfBool}}">Start Page:</Label>
+                            <tk:IntegerUpDown Value="{Binding StartPage}" Grid.Column="1" Grid.Row="0" Margin="3" Minimum="0" Visibility="{Binding Path=ShowStartEnd,Converter={StaticResource VisibilityOfBool}}"/>
+                            <Label Grid.Column="0" Grid.Row="1" Visibility="{Binding Path=ShowStartEnd,Converter={StaticResource VisibilityOfBool}}">End Page:</Label>
+                            <tk:IntegerUpDown Value="{Binding EndPage}" Grid.Column="1" Grid.Row="1" Margin="3" Minimum="0" Visibility="{Binding Path=ShowStartEnd,Converter={StaticResource VisibilityOfBool}}"/>
+                            <Label Grid.Column="0" Grid.Row="2">Pages Per Cutout</Label>
+                            <tk:IntegerUpDown Value="{Binding ExtractLength}" Grid.Column="1" Grid.Row="2" Margin="3" Minimum="0"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Folder" DockPanel.Dock="Top" Visibility="{Binding Path=ShowFolderOptions,Converter={StaticResource VisibilityOfBool}}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <CheckBox IsChecked="{Binding FolderIncludeSubFolders}" Margin="5,2"  HorizontalAlignment="Left" Grid.Row="0">Include Subfolders</CheckBox>
+                            <CheckBox IsChecked="{Binding FolderSplitFiles}" Margin="5,2"  HorizontalAlignment="Left" Grid.Row="1">Split Files</CheckBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="File Names" DockPanel.Dock="Top">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Header="Suffix" Grid.Row="0">
+                                <WrapPanel Margin="5,2"  HorizontalAlignment="Left" >
+                                    <RadioButton GroupName="SUFFIX" IsChecked="{Binding SuffixCount}">File Index</RadioButton>
+                                    <RadioButton GroupName="SUFFIX" Margin="5,0" IsChecked="{Binding SuffixPageNumber}">Start Page#</RadioButton>
+                                    <RadioButton GroupName="SUFFIX" Margin="5,0" IsChecked="{Binding SearchForName}" ToolTip="Searches for text enclosed within {#Text#}">Search</RadioButton>
+                                </WrapPanel>
+                            </GroupBox>
+                            <WrapPanel Grid.Row="1" HorizontalAlignment="Stretch">
+                                <Label>Prefix (Search):</Label>
+                                <ComboBox Name="scanCombo" SelectedIndex="0" SelectedItem="{Binding Path=PrefixScanDirection}" ItemsSource="{Binding Path=PrefixScanOptions}" />
+                                    
+                                <TextBox Text="{Binding PrefixPattern,UpdateSourceTrigger=PropertyChanged}" MinWidth="100"></TextBox>
+                            </WrapPanel>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Other" DockPanel.Dock="Top">
+                        <StackPanel>
+                            <WrapPanel>
+                                <Label>Watermark:</Label>
+                                <TextBox Text="{Binding WaterMark, UpdateSourceTrigger=PropertyChanged}" MinWidth="150"></TextBox>
+                            </WrapPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <Grid/>
+                </DockPanel>
+                <TextBox Grid.Column="2" Text="{Binding StatusMessage}" IsReadOnly="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>                
+            </Grid>
+        </DockPanel>
+    </tk:BusyIndicator>
+</Window>
